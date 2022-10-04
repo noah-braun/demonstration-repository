@@ -1,14 +1,14 @@
 int _state = 1;
 
-int balls = 25;
-int chasers = 3;
+int balls = 100;
+int chasers = 7;
 Mover[] mover = new Mover[balls];
 int aliveBalls = mover.length;
 Mover[] chaser = new Mover[chasers];
 HUD hud;
 HUD health;
 
-int _lifeForce = 5;
+int _lifeForce = 200;
 
 float _ballR = 10;
 float _errorMargin = 20;
@@ -19,6 +19,7 @@ boolean _flash = false;
 void setup()
 {
   size(800, 800);
+  fullScreen();
   
   for(int i = 0; i < mover.length; i ++)
   {

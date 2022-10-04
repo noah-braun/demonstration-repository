@@ -116,6 +116,7 @@ class Mover
     {
       alive = false;
       aliveBalls --;
+      _lifeForce = _lifeForce + 2;
     }
   }
   
@@ -125,7 +126,7 @@ class Mover
     {
       _state = 0;
       _flash = true;
-      _lifeForce = _lifeForce - 1;
+      _lifeForce = _lifeForce - 40;
       hungry = false;
     }
     if(dist > this.ballR + 50)
