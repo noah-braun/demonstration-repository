@@ -6,11 +6,15 @@ class Mover
   PVector acceleration2 = new PVector(0, 0);
   
   boolean alive = true;
+  boolean chaser = false;
+  boolean hungry = true;
   
-  float vLim = random(1, 10);
+  float vLim = random(1, 7);
   float aLim = random(0.1, 0.3);
   
   float ballR = 25;
+  
+  float dist = 0;  //distance from mouse
   
   Mover(float x, float y, float r)
   {
@@ -23,16 +27,24 @@ class Mover
   {
     PVector mouse = new PVector(mouseX, mouseY);
     PVector dir = PVector.sub(mouse, position);
-    float dist = dir.mag();
+    this.dist = dir.mag();
     
     dir.normalize();
-    dir.mult(-aLim);
+    
+    if(chaser == false)
+    {
+      dir.mult(-aLim);
+    }
+    else
+    {
+      dir.mult(aLim);
+    }
     acceleration1 = dir;  //chasing mouse
     acceleration2 = PVector.random2D();  //random crawling
     
-    if(dist <= 200)
+    if(dist <= 400)
     {
-      acceleration1.lerp(acceleration2, (dist/200));  //i dont understand this line yet
+      acceleration1.lerp(acceleration2, (dist/400));  //i dont understand this line yet
       velocity.add(acceleration1);
     }
     else
@@ -48,8 +60,16 @@ class Mover
   {
     if(alive)
     {
+      if(chaser == false)
+      {
+        fill(_col, 76, 100-(dist/5));
+      }
+      else
+      {
+        fill(0, 0, 100-(dist/5));
+      }
       noStroke();
-      fill(_col, 76, 95);
+      
       circle(position.x, position.y, this.ballR*2);
     }
   }
@@ -77,13 +97,40 @@ class Mover
     }
   }
   
-  void dieIfHit()
+  void bounce()
   {
-    if(mouseX >= this.position.x - ballR - _errorMargin && mouseX <= this.position.x + ballR + _errorMargin
-    && mouseY >= this.position.y - ballR - _errorMargin && mouseY <= this.position.y + ballR + _errorMargin)
+    if(position.x > width - ballR || position.x < 0 + ballR)
+    {
+      velocity.x = -velocity.x;
+    }
+    
+    if(position.y > height - ballR || position.y < 0 + ballR)
+    {
+      velocity.y = -velocity.y;
+    }
+  }
+  
+  void bite()
+  {
+    if(dist < ballR + _errorMargin && alive == true)
     {
       alive = false;
-      deadBalls ++;
+      aliveBalls --;
+    }
+  }
+  
+  void danger()
+  {
+    if(dist < this.ballR && _lifeForce > 0 && hungry == true)
+    {
+      _state = 0;
+      _flash = true;
+      _lifeForce = _lifeForce - 1;
+      hungry = false;
+    }
+    if(dist > this.ballR + 50)
+    {
+      hungry = true;
     }
   }
   
