@@ -9,51 +9,50 @@ int fps = 40;
 
 float step = -500;
 
-Sprite s;
+LilGuy guy;
 
 void setup()
 {
   size(800, 600);
+//  fullScreen();
   
   rest = loadShape("Sprite Rest.svg");
   walk1 = loadShape("Sprite Walk 1.svg");
   walk2 = loadShape("Sprite Walk 2.svg");
   
-  s = new Sprite();
-  s.vel.x = 2;
+  guy = new LilGuy();
+  guy.vel.x = 2;
   String[] files = {"Sprite Walk 1.svg", "Sprite Walk 2.svg"};
-  s.animate(files, 10);
-}
+  guy.addAnim(files, 10);
+  String[] filesL = {"Sprite Walk 1L.svg", "Sprite Walk 2L.svg"};
+  guy.addAnim(filesL, 10);
+  String[] jumpFiles = {"Sprite Jump 1.svg", "Sprite Jump 2.svg", "Sprite Jump 3.svg", "Sprite Jump 4.svg", "Sprite Jump 3.svg", "Sprite Jump 2.svg", "Sprite Jump 1.svg"};
+  guy.addAnim(jumpFiles, 10);
+} 
 
 void draw()
 {
   translate(width/2, height/2);
-  
   background(255);
-  s.update();
-  s.check();
-  s.show();
+  fill(0);
+  rect(-width/2, guy.boxx/2, width, height);
   
-  /*
-  if(mousePressed == false)
+  for(int i = 0; i < 3; i ++)
   {
-    count = count + 1;
-    if(count > fps) count = 0;
-  
-    step = step + 2;
-    if(step > width + 700) step = -500;
+    pushMatrix();
+      fill(0);
+      circle(i*300, guy.boxx/2, 50);
+    popMatrix();
   }
   
-  pushMatrix();
-    background(220);
-    scale(0.5);
-    translate(0, 400);
-    if(count < fps/2) shape(walk1, step, 0);
-    else shape(walk2, step, 0);
-  popMatrix();
-  
-  //floor
-  fill(0);
-  rect(0, 440, width, height);
-  */
+  guy.update();
+  guy.check();
+  guy.ground();
+  guy.changeAnim();
+  guy.show();
+}
+
+void keyPressed()
+{
+  guy.jump();
 }
