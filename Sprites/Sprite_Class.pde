@@ -36,15 +36,6 @@ class Sprite
   
   void check()
   {
-    float actualX = screenX(this.pos.x, this.pos.y);  //gets you the un-translated value of x for the two coordinates
-    //if(actualX > width + this.boxx) this.pos.x = 0 - width/2 - boxx;
-    
-    
-    if(this.vel.x > 0) this.currentAnim = 0;
-    if(this.vel.x < 0) this.currentAnim = 1;
-    
-    if(actualX > width + this.boxx) this.vel.x = -2;
-    if(actualX < 0 - this.boxx) this.vel.x = 2;
     
   }
   
@@ -55,11 +46,11 @@ class Sprite
       
       noStroke();
       fill(255, 0, 0);
-      circle(0, 0, 10);
+      //circle(0, 0, 10);
       
       translate(-anchor.x, -anchor.y);
       fill(255, 0, 0, 20);
-      rect(0, 0, boxx, boxy);
+      //rect(0, 0, boxx, boxy);
       if(this.currentAnim > -1) this.sAnim[currentAnim].show();
     popMatrix();
   }
