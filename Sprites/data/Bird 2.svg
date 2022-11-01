@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 26.5.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 26.5.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 100 60" style="enable-background:new 0 0 100 60;" xml:space="preserve">
-<polyline style="fill:#FFFFFF;stroke:#000000;stroke-width:3;stroke-miterlimit:10;" points="16.4912,16.6 8.0737,18.4 2.0949,29.2 
-	14.4078,25.985 "/>
-<polygon style="fill:#DD5E5E;stroke:#000000;stroke-width:3;stroke-miterlimit:10;" points="61.4949,40 32.6949,38.2 
-	26.3949,29.425 36.7706,17.5385 80.8191,17.5385 "/>
-<polygon style="fill:#DD5E5E;stroke:#000000;stroke-width:3;stroke-miterlimit:10;" points="37.1987,10.4427 17.5352,11.8972 
-	12.8949,32.8 34.4949,27.4 "/>
-<polygon points="27.2949,16.6 20.9949,21.1 27.2949,20.0469 "/>
-<polygon style="fill:#DD5E5E;stroke:#000000;stroke-width:3;stroke-miterlimit:10;" points="48.7854,21.1 72.5039,21.1 
-	85.4537,38.2507 "/>
+	 viewBox="0 0 98.88 50.2" style="enable-background:new 0 0 98.88 50.2;" xml:space="preserve">
+<polygon points="38.7721,21.685 6.147,48.1428 29.5843,49.4803 "/>
+<g>
+	<path d="M16.5595,14.525l33.6,35.27l27.88-49.39L16.5595,14.525z M22.3695,16.265l49.72-11.41l-22.55,39.94L22.3695,16.265z"/>
+	<polygon style="fill:#FFFFFF;" points="72.0894,4.855 49.5395,44.795 22.3695,16.265 	"/>
+</g>
+<polygon points="29.5076,20.1987 48.0365,17.5052 43.1094,27.9274 "/>
+<polygon points="55.6082,18.2841 96.093,33.279 74.2395,42.1458 "/>
 </svg>

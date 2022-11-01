@@ -1,4 +1,8 @@
+import processing.sound.*;
+SoundFile beep;
+
 import de.looksgood.ani.*;
+
 int a = 0;
 
 //sprites
@@ -12,12 +16,17 @@ int fps = 40;
 
 float step = -500;
 
-float _groundVel = -5;
+float _groundVel = -7;
 
 LilGuy guy;
-Ground[] ground = new Ground[3];
-Rock rock;
-Tree tree;
+
+int nGround = 0;
+Ground[] ground;
+
+int nRock = 4;
+Rock[] rock;
+
+
 Bird bird;
 
 void setup()
@@ -44,29 +53,43 @@ void setup()
   guy.addAnim(duckFiles, 10);
   
   
-  for(int i = 0; i < 3; i ++)
+  nGround = ceil(width/800.0) + 2;  //ciel (short for ceiling, rounds up a float to a int)
+  ground = new Ground[nGround];
+  for(int i = 0; i < ground.length; i ++)
   {
     String[] groundFile = {"Ground.svg"};
     ground[i] = new Ground();
     ground[i].pos.x = -width/2.0 + (ground[i].boxx*i);
     ground[i].addAnim(groundFile, 1);
   }
-  
-  rock = new Rock();
-  String[] rockFile = {"Rock.svg"};
-  rock.addAnim(rockFile, 10);
-  rock.vel.x = _groundVel;
-  
-  tree = new Tree();
-  String[] treeFile = {"Rock.svg"};
-  tree.addAnim(treeFile, 10);
-  tree.vel.x = _groundVel;
+ 
+ 
+  rock = new Rock[nRock];
+  String[] rockFile1 = {"Rock.svg"};
+  String[] rockFile2 = {"Rock 2.svg"};
+  String[] rockFile3 = {"Rock 3.svg"};
+  String[] rockFile4 = {"Rock 4.svg"};
+
+  for(int i = 0; i < nRock; i ++)
+  {
+    rock[i] = new Rock();
+    rock[i].addAnim(rockFile1, 0);
+    rock[i].addAnim(rockFile2, 0);
+    rock[i].addAnim(rockFile3, 0);
+    rock[i].addAnim(rockFile4, 0);
+    rock[i].pos.x = -(width/2) - 50;
+    rock[i].pos.y = 70;
+  }
   
   bird = new Bird();
   String[] birdFile = {"Bird 1.svg", "Bird 2.svg"};
   bird.addAnim(birdFile, 10);
   bird.pos.x = 400;
   bird.vel.x = _groundVel;
+  
+  beep = new SoundFile(this, "beep.wav");
+  
+  
 } 
 
 void draw()
@@ -75,7 +98,7 @@ void draw()
   translate(width/2, height/2);
   background(40); 
   
-  for(int i = 0; i < 3; i ++)
+  for(int i = 0; i < ground.length; i ++)
   {
     ground[i].check();
     ground[i].update();
@@ -88,9 +111,14 @@ void draw()
   guy.changeAnim();
   guy.show();
   
-  rock.check();
-  rock.update();
-  rock.show();
+  for(int i = 0; i < nRock; i ++)
+  {
+    rock[i].check();
+    rock[i].update();
+    rock[i].show();
+    rock[i].collide();
+  }
+  
   
   bird.check();
   bird.update();

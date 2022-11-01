@@ -46,11 +46,13 @@ class Sprite
       
       noStroke();
       fill(255, 0, 0);
-      //circle(0, 0, 10);
+      circle(0, 0, 10);
+      fill(0, 0, 255, 50);
+      circle(0, 0, min(boxx, boxy));
       
       translate(-anchor.x, -anchor.y);
       fill(255, 0, 0, 20);
-      //rect(0, 0, boxx, boxy);
+      rect(0, 0, boxx, boxy);
       if(this.currentAnim > -1) this.sAnim[currentAnim].show();
     popMatrix();
   }

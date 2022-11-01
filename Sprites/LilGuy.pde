@@ -13,8 +13,16 @@ class LilGuy extends Sprite
     pushMatrix();
       translate(pos.x, pos.y);
       rotate(radians(a));
-      translate(-anchor.x, -anchor.y);
       
+      noStroke();
+      fill(255, 0, 0);
+      circle(0, 0, 10);
+      fill(0, 0, 255, 50);
+      circle(0, 0, min(boxx, boxy));
+      
+      translate(-anchor.x, -anchor.y);
+      fill(255, 0, 0, 20);
+      rect(0, 0, boxx, boxy);
       if(this.currentAnim > -1) this.sAnim[currentAnim].show();
     popMatrix();
   }
@@ -33,6 +41,11 @@ class LilGuy extends Sprite
   void duck()
   {
     this.isDuck = true;
+    
+    if(this.pos.y < 16)
+    {
+      this.acc.y = 0.7;
+    }
   }
   
   void ground()
