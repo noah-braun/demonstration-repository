@@ -3,8 +3,6 @@ SoundFile beep;
 
 import de.looksgood.ani.*;
 
-int a = 0;
-
 //sprites
 
 PShape rest;
@@ -20,7 +18,7 @@ float _groundVel = -7;
 
 LilGuy guy;
 
-int nGround = 0;
+int nGround = 3;
 Ground[] ground;
 
 int nRock = 4;
@@ -29,11 +27,20 @@ Rock[] rock;
 
 Bird bird;
 
+int _lives = 3;
+int _state = 0; 
+PImage startScreen;
+PImage gameOver;
+
+color red = color(221, 94, 94);
+HUD health;
+
 void setup()
 {
   size(800, 600);
   Ani.init(this);
-//  fullScreen();
+  startScreen = loadImage("Start Screen.png");
+  gameOver = loadImage("Game Over.png");
   
   rest = loadShape("Sprite Rest.svg");
   walk1 = loadShape("Sprite Walk 1.svg");
@@ -84,17 +91,42 @@ void setup()
   bird = new Bird();
   String[] birdFile = {"Bird 1.svg", "Bird 2.svg"};
   bird.addAnim(birdFile, 10);
-  bird.pos.x = 400;
-  bird.vel.x = _groundVel;
+  bird.vel.x = _groundVel - 2;
   
-  beep = new SoundFile(this, "beep.wav");
-  
+  health = new HUD();
   
 } 
 
 void draw()
 {
-  
+  if(_state == 0)
+  {
+    startScreen();
+    if(key == 'w') _state = 1;
+  }
+  if(_state == 1)
+  {
+    gamePlay();
+    if(_lives == 0) _state = 2;
+  }
+  if(_state == 2)
+  {
+    gameOver();
+    if(key == 'w') 
+    {
+      _state = 1;
+    }
+  }
+}
+
+void startScreen()
+{
+  background(90);
+  image(startScreen, width/2 - startScreen.width/2, height/2 - startScreen.height/2);
+}
+
+void gamePlay()
+{
   translate(width/2, height/2);
   background(40); 
   
@@ -108,8 +140,13 @@ void draw()
   guy.update();
   guy.check();
   guy.ground();
-  guy.changeAnim();
   guy.show();
+  
+  
+  bird.check();
+  bird.update();
+  bird.show();
+  bird.collide();
   
   for(int i = 0; i < nRock; i ++)
   {
@@ -119,18 +156,14 @@ void draw()
     rock[i].collide();
   }
   
-  
-  bird.check();
-  bird.update();
-  bird.show();
+  health.health();
 }
 
 void keyPressed()
-{
-  if(key == 'w' && guy.pos.y == 16)
+{  
+  if(key == 'w')
   {
     guy.jump();
-    Ani.to(this, 1 , "a", 360);
   }
   if(key == 's')
   {
@@ -140,4 +173,10 @@ void keyPressed()
   {
     guy.isDuck = false;
   }
+}
+
+void gameOver()
+{
+  background(90);
+  image(gameOver, width/2 - gameOver.width/2, height/2 - gameOver.height/2);
 }
