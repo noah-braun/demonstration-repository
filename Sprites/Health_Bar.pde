@@ -14,11 +14,11 @@ class HUD
     pushMatrix();
       translate(-width/2, -height/2);
       fill(red);
-      rect(20, 20, _lives * (width/3)/3, -10);
+      rect(20, height-20, _lives * (width/3)/3, -10);
       noFill();
       strokeWeight(3);
       stroke(20);
-      rect(20, 20, width/3, -10);
+      rect(20, height-20, width/3, -10);
     popMatrix();
   }
 }

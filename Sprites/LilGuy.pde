@@ -5,6 +5,8 @@ class LilGuy extends Sprite
   boolean onGround = true;
   private int a = 0;
   
+  int jumps = 2;
+  
   LilGuy()
   {
     super();  //inherits EVERYTHING from sprite 
@@ -26,12 +28,11 @@ class LilGuy extends Sprite
   
   public void jump()
   {
-    this.isJump = true;
+    this.jumps = this.jumps - 1;
     this.hitboxy = 0;
     
-    if(this.pos.y == 16)
+    if(this.jumps >= 0)
     {
-      Ani.to(this, 1 , "a", 360);
       this.vel.y = -10;
       this.acc.y = 0.3;
     }
@@ -40,9 +41,9 @@ class LilGuy extends Sprite
   void duck()
   {
     this.isDuck = true;
-    this.hitboxy = 20;
+    this.hitboxy = 30;
     
-    if(this.pos.y < 16)
+    if(this.pos.y < _groundY)
     {
       this.acc.y = 0.7;
     }
@@ -50,12 +51,12 @@ class LilGuy extends Sprite
   
   void ground()
   {
-    if(this.pos.y > 16)  
+    if(this.pos.y > _groundY)  
     {
-      this.pos.y = 16;
+      this.pos.y = _groundY;
       this.vel.y = 0;
       this.acc.y = 0; 
-      this.isJump = false;
+      this.jumps = 2;
       a = 0;
     }
   }
@@ -63,7 +64,7 @@ class LilGuy extends Sprite
   private void changeAnim()
   {
     guy.currentAnim = 0;
-    if(this.isJump)
+    if(this.jumps < 2)
     {
       guy.currentAnim = 2;
     }

@@ -50,21 +50,35 @@ class Sprite
   
   void show()
   {
-    pushMatrix();
-      translate(pos.x, pos.y);
-      
-      noStroke();
-      fill(255, 0, 0);
-      //circle(0, 0, 10);
-      fill(0, 0, 255, 50);
+    boolean showHitboxes = false;
+    
+    if(showHitboxes)
+    {
       pushMatrix();
-        translate(0, this.hitboxy);
-        //circle(0, 0, this.hitboxr);
+        translate(pos.x, pos.y);
+        
+        noStroke();
+        fill(255, 0, 0);
+        circle(0, 0, 10);
+        fill(0, 0, 255, 50);
+        pushMatrix();
+          translate(0, this.hitboxy);
+          circle(0, 0, this.hitboxr);
+        popMatrix();
+        translate(-anchor.x, -anchor.y);
+        fill(255, 0, 0, 20);
+        rect(0, 0, boxx, boxy);
+        showSprite();
       popMatrix();
-      translate(-anchor.x, -anchor.y);
-      fill(255, 0, 0, 20);
-      //rect(0, 0, boxx, boxy);
-      showSprite();
-    popMatrix();
+    }
+    
+    if(!showHitboxes)
+    {
+      pushMatrix();
+        translate(pos.x, pos.y);
+        translate(-anchor.x, -anchor.y);
+        showSprite();
+      popMatrix();
+    }
   }
 }

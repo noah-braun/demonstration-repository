@@ -3,7 +3,7 @@ class Bird extends Sprite
   Bird()
   {
     this.pos.x = -100000;
-    this.pos.y = -20;
+    this.pos.y = _groundY - 40;
     this.boxx = 98;
     this.boxy = 50;
     this.hitboxr = 50;
