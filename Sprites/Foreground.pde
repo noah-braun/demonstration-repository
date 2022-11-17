@@ -15,4 +15,10 @@ class Foreground extends Ground
       
     }
   }
+  
+  void update()
+  {
+    super.update();
+    this.vel.x = _difficulty*(_groundVel - 3);
+  }
 }

@@ -33,8 +33,8 @@ class LilGuy extends Sprite
     
     if(this.jumps >= 0)
     {
-      this.vel.y = -10;
-      this.acc.y = 0.3;
+      this.vel.y = -10 * sqrt(_difficulty);
+      this.acc.y = 0.3 * _difficulty;
     }
   }
   
@@ -45,7 +45,7 @@ class LilGuy extends Sprite
     
     if(this.pos.y < _groundY)
     {
-      this.acc.y = 0.7;
+      this.acc.y = 0.7 * sq(_difficulty);
     }
   }
   

@@ -21,6 +21,12 @@ class Bird extends Sprite
     }
   }
   
+  void update()
+  {
+    super.update();
+    this.vel.x = _difficulty*(_groundVel - 2);
+  }
+  
   boolean collide()
   {
     PVector p1 =  new PVector(this.pos.x, this.pos.y + this.hitboxy);

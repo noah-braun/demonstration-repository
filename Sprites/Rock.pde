@@ -32,6 +32,12 @@ class Rock extends Sprite
     }
   }
 
+  void update()
+  {
+    super.update();
+    this.vel.x = _difficulty * _groundVel;
+  }
+
   boolean collide()
   {
     PVector p1 =  new PVector(this.pos.x, this.pos.y);

@@ -10,7 +10,7 @@ class Ground extends Sprite
       this.boxy = 600.0;
       this.pos.x = -width/2.0;
       this.pos.y = -height/2.0;
-      this.vel.x = _difficulty*_groundVel;
+      this.vel.x = _difficulty * _groundVel;
       
   }
   
@@ -22,5 +22,11 @@ class Ground extends Sprite
       this.pos.x = (-width/2.00) + (this.boxx * (nGround - 1));
       
     }
+  }
+  
+  void update()
+  {
+    super.update();
+    this.vel.x = _difficulty * _groundVel;
   }
 }

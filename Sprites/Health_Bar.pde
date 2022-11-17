@@ -17,7 +17,7 @@ class HUD
       rect(20, height-20, _lives * (width/3)/3, -10);
       noFill();
       strokeWeight(3);
-      stroke(20);
+      stroke(68, 24, 24);
       rect(20, height-20, width/3, -10);
     popMatrix();
   }
